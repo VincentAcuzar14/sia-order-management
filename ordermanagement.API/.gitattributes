@@ -1,0 +1,14 @@
+# Ensure all files use LF in the repo
+* text=auto
+
+# Specific files with binary content
+*.env text eol=lf
+*.bin text eol=lf
+# Automatically normalize text files to LF in the repository
+* text=auto
+
+# Explicitly set JSON files to LF
+*.json text eol=lf
+
+# TypeScript files should also use LF
+*.ts text eol=lf
