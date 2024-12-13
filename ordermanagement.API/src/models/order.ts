@@ -2,8 +2,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 // Interface for Order_Detail
-interface IOrderDetail extends Document {
-  OrderDetailID: string;  // Primary Key for Order_Detail
+interface IOrder extends Document {
   OrderID: string;        // Foreign Key, links to Order
   ProductID: string;      // Foreign Key, links to Product
   Quantity: number;       // Quantity of the product in the order
@@ -11,9 +10,8 @@ interface IOrderDetail extends Document {
 }
 
 // Schema for Order_Detail
-const OrderDetailSchema = new Schema<IOrderDetail>(
+const OrderSchema = new Schema<IOrder>(
   {
-    OrderDetailID: { type: String, required: true, unique: true },
     OrderID: { type: String, required: true },
     ProductID: { type: String, required: true },
     Quantity: { type: Number, required: true, min: 0 },
@@ -23,7 +21,7 @@ const OrderDetailSchema = new Schema<IOrderDetail>(
 );
 
 // Model for Order_Detail
-export const OrderDetail = mongoose.model<IOrderDetail>(
-  'OrderDetail',
-  OrderDetailSchema
+export const OrderDetail = mongoose.model<IOrder>(
+  'Orderl',
+  OrderSchema
 );

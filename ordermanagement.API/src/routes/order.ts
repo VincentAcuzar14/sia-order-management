@@ -1,10 +1,10 @@
 import express from "express";
-import { OrderDetailController } from "../controllers/orderController";
+import { OrderController } from "../controllers/orderController";
 import { authMiddleware } from "../middleware/authMiddleware";
 
 // Initialize express Router
 const router = express.Router();
-const orderDetailsController = new OrderDetailController();
+const orderController = new OrderController();
 
 /**
  * @swagger
@@ -21,7 +21,6 @@ const orderDetailsController = new OrderDetailController();
  *       type: object
  *       required:
  *         - OrderID
- *         - OrderID
  *         - ProductID
  *         - Quantity
  *         - Price
@@ -29,9 +28,6 @@ const orderDetailsController = new OrderDetailController();
  *         OrderID:
  *           type: string
  *           description: Unique identifier for the order detail
- *         OrderID:
- *           type: string
- *           description: Foreign key linking to the Order
  *         ProductID:
  *           type: string
  *           description: Foreign key linking to the Product
@@ -92,23 +88,23 @@ const orderDetailsController = new OrderDetailController();
 
 /**
  * @swagger
- * /api/order-details:
+ * /api/order:
  *   post:
- *     summary: Add a new order detail
- *     tags: [OrderDetails]
+ *     summary: Add a new order
+ *     tags: [Order]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/OrderDetail'
+ *             $ref: '#/components/schemas/Order'
  *     responses:
  *       201:
- *         description: Order detail created successfully
+ *         description: Order created successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/OrderDetailResponse'
+ *               $ref: '#/components/schemas/OrderResponse'
  *       400:
  *         description: Validation error
  *         content:
@@ -129,9 +125,9 @@ const orderDetailsController = new OrderDetailController();
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/OrderDetailResponse'
+ *                 $ref: '#/components/schemas/OrderResponse'
  *
- * /api/order-details/{id}:
+ * /api/order/{id}:
  *   get:
  *     summary: Get order  by ID
  *     tags: [Order]
@@ -146,11 +142,11 @@ const orderDetailsController = new OrderDetailController();
  *         description: Order  ID
  *     responses:
  *       200:
- *         description: Order  details
+ *         description: Order  
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/OrderDetailResponse'
+ *               $ref: '#/components/schemas/OrderResponse'
  *       404:
  *         description: Order  not found
  *
@@ -171,19 +167,19 @@ const orderDetailsController = new OrderDetailController();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/OrderDetail'
+ *             $ref: '#/components/schemas/Order'
  *     responses:
  *       200:
- *         description: Order detail updated successfully
+ *         description: Order updated successfully
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/OrderDetailResponse'
+ *               $ref: '#/components/schemas/OrderResponse'
  *       404:
  *         description: Order detail not found
  *
  *   delete:
- *     summary: Delete order detail
+ *     summary: Delete order 
  *     tags: [Order]
  *     security:
  *       - bearerAuth: []
@@ -193,7 +189,7 @@ const orderDetailsController = new OrderDetailController();
  *         required: true
  *         schema:
  *           type: string
- *         description: Order detail ID
+ *         description: OrderID
  *     responses:
  *       204:
  *         description: Order detail deleted successfully
@@ -202,10 +198,10 @@ const orderDetailsController = new OrderDetailController();
  */
 
 // Define Routes
-router.post("/api/order-detail", authMiddleware, orderDetailsController.createorder);
-router.get("/api/order-detail", authMiddleware, orderDetailsController.getAllOrderDetails);
-router.get("/api/order-detail/:id", authMiddleware, orderDetailsController.getOrderDetailById);
-router.put("/api/order-detail/:id", authMiddleware, orderDetailsController.updateOrderDetail);
-router.delete("/api/order-detail/:id", authMiddleware, orderDetailsController.deleteOrderDetail);
+router.post("/api/order-detail", authMiddleware, orderController.createorder);
+router.get("/api/order-detail", authMiddleware, orderController.getAllOrderDetails);
+router.get("/api/order-detail/:id", authMiddleware, orderController.getOrderDetailById);
+router.put("/api/order-detail/:id", authMiddleware, orderController.updateOrderDetail);
+router.delete("/api/order-detail/:id", authMiddleware, orderController.deleteOrderDetail);
 
 export default router;

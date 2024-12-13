@@ -9,7 +9,6 @@ import Joi from "joi"; // Import Joi validation library
  *       type: object
  *       required:
  *         - orderId
- *         - orderId
  *         - productId
  *         - quantity
  *         - price
@@ -18,9 +17,6 @@ import Joi from "joi"; // Import Joi validation library
  *     OrderResponse:
  *       type: object
  *       properties:
- *         orderDetailId:
- *           type: string
- *           description: Order detail's unique identifier
  *         orderId:
  *           type: string
  *         productId:
@@ -56,10 +52,6 @@ const orderDetailValidationSchema = Joi.object({
   // OrderDetail ID validation
   // - Must be a string with a max length of 30 characters
   // - Required field
-  orderDetailId: Joi.string().max(30).required().messages({
-    "string.max": "Order Detail ID cannot exceed 30 characters",
-    "any.required": "Order Detail ID is required",
-  }),
 
   // Order ID validation
   // - Must be a string with a max length of 30 characters

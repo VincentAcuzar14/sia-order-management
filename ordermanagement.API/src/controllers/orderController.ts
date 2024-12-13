@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { OrderDetail } from "../models/order";
-import { IOrderDetail } from "../interfaces/order";
+import { IOrder } from "../interfaces/order";
 import mongoose from "mongoose";
 import { validateOrderDetail } from "../validations/order";
 
-export class OrderDetailController {
+export class OrderController {
   // Create a new order detail
   // Handles POST requests to create a new order detail in the database
   public async createorder(req: Request, res: Response): Promise<void> {
@@ -19,7 +19,7 @@ export class OrderDetailController {
       }
 
       // Prepare order detail data with a new MongoDB ID
-      const orderDetailData: IOrderDetail = {
+      const orderDetailData: IOrder = {
         _id: new mongoose.Types.ObjectId(),
         ...payload,
       };
@@ -40,7 +40,7 @@ export class OrderDetailController {
   public async getAllOrderDetails(req: Request, res: Response): Promise<void> {
     try {
       // Fetch all order details from the database
-      const orderDetails: IOrderDetail[] = await OrderDetail.find();
+      const orderDetails: IOrder[] = await OrderDetail.find();
       res.json(orderDetails);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -52,7 +52,7 @@ export class OrderDetailController {
   public async getOrderDetailById(req: Request, res: Response): Promise<void> {
     try {
       // Attempt to find order detail by ID
-      const orderDetail: IOrderDetail | null = await OrderDetail.findById(req.params.id);
+      const orderDetail: IOrder | null = await OrderDetail.findById(req.params.id);
 
       // Return 404 if order detail doesn't exist
       if (!orderDetail) {
@@ -81,7 +81,7 @@ export class OrderDetailController {
       }
 
       // Update the order detail and get the updated document
-      const updatedOrderDetail: IOrderDetail | null = await OrderDetail.findByIdAndUpdate(
+      const updatedOrderDetail: IOrder | null = await OrderDetail.findByIdAndUpdate(
         req.params.id,
         payload,
         { new: true } // This option returns the modified document rather than the original
@@ -105,7 +105,7 @@ export class OrderDetailController {
   public async deleteOrderDetail(req: Request, res: Response): Promise<void> {
     try {
       // Attempt to find and delete the order detail in one operation
-      const deletedOrderDetail: IOrderDetail | null = await OrderDetail.findByIdAndDelete(req.params.id);
+      const deletedOrderDetail: IOrder | null = await OrderDetail.findByIdAndDelete(req.params.id);
 
       // Return 404 if order detail doesn't exist
       if (!deletedOrderDetail) {

@@ -6,7 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import "./config/logging";
 import { DEVELOPMENT, mongo, server } from "./config/config";
 import payment from "./routes/payment";
-import orderDetail from "./routes/orderDetail";
+import order from "./routes/order";
 import supplier from "./routes/supplier";
 import authRoutes from "./routes/authRoutes";
 
@@ -70,7 +70,7 @@ export const Main = async () => {
   logging.log("----------------------------------------");
   application.use(payment);
   application.use(supplier);
-  application.use(orderDetail);
+  application.use(order);
   application.use(authRoutes);
 
   logging.log("----------------------------------------");
