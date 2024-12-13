@@ -5,17 +5,17 @@ import Joi from "joi"; // Import Joi validation library
  * @swagger
  * components:
  *   schemas:
- *     OrderDetail:
+ *     Order:
  *       type: object
  *       required:
- *         - orderDetailId
+ *         - orderId
  *         - orderId
  *         - productId
  *         - quantity
  *         - price
  *       properties:
  *         
- *     OrderDetailResponse:
+ *     OrderResponse:
  *       type: object
  *       properties:
  *         orderDetailId:

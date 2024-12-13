@@ -1,5 +1,5 @@
 import express from "express";
-import { OrderDetailController } from "../controllers/orderDetailController";
+import { OrderDetailController } from "../controllers/orderController";
 import { authMiddleware } from "../middleware/authMiddleware";
 
 // Initialize express Router
@@ -9,24 +9,24 @@ const orderDetailsController = new OrderDetailController();
 /**
  * @swagger
  * tags:
- *   name: OrderDetails
- *   description: Order Details Management endpoints
+ *   name: Order
+ *   description: Order Management endpoints
  */
 
 /**
  * @swagger
  * components:
  *   schemas:
- *     OrderDetail:
+ *     Order:
  *       type: object
  *       required:
- *         - OrderDetailID
+ *         - OrderID
  *         - OrderID
  *         - ProductID
  *         - Quantity
  *         - Price
  *       properties:
- *         OrderDetailID:
+ *         OrderID:
  *           type: string
  *           description: Unique identifier for the order detail
  *         OrderID:
@@ -41,7 +41,7 @@ const orderDetailsController = new OrderDetailController();
  *         Price:
  *           type: number
  *           description: Price per unit of the product
- *     OrderDetailResponse:
+ *     OrderResponse:
  *       type: object
  *       properties:
  *         id:
@@ -117,13 +117,13 @@ const orderDetailsController = new OrderDetailController();
  *               $ref: '#/components/schemas/ValidationError'
  *
  *   get:
- *     summary: Get all order details
- *     tags: [OrderDetails]
+ *     summary: Get all order 
+ *     tags: [Order]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: List of order details
+ *         description: List of order 
  *         content:
  *           application/json:
  *             schema:
@@ -133,8 +133,8 @@ const orderDetailsController = new OrderDetailController();
  *
  * /api/order-details/{id}:
  *   get:
- *     summary: Get order detail by ID
- *     tags: [OrderDetails]
+ *     summary: Get order  by ID
+ *     tags: [Order]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -143,20 +143,20 @@ const orderDetailsController = new OrderDetailController();
  *         required: true
  *         schema:
  *           type: string
- *         description: Order detail ID
+ *         description: Order  ID
  *     responses:
  *       200:
- *         description: Order detail details
+ *         description: Order  details
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/OrderDetailResponse'
  *       404:
- *         description: Order detail not found
+ *         description: Order  not found
  *
  *   put:
- *     summary: Update order detail
- *     tags: [OrderDetails]
+ *     summary: Update order 
+ *     tags: [Order]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -165,7 +165,7 @@ const orderDetailsController = new OrderDetailController();
  *         required: true
  *         schema:
  *           type: string
- *         description: Order detail ID
+ *         description: Order ID
  *     requestBody:
  *       required: true
  *       content:
@@ -184,7 +184,7 @@ const orderDetailsController = new OrderDetailController();
  *
  *   delete:
  *     summary: Delete order detail
- *     tags: [OrderDetails]
+ *     tags: [Order]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -202,10 +202,10 @@ const orderDetailsController = new OrderDetailController();
  */
 
 // Define Routes
-router.post("/api/order-details", authMiddleware, orderDetailsController.createOrderDetail);
-router.get("/api/order-details", authMiddleware, orderDetailsController.getAllOrderDetails);
-router.get("/api/order-details/:id", authMiddleware, orderDetailsController.getOrderDetailById);
-router.put("/api/order-details/:id", authMiddleware, orderDetailsController.updateOrderDetail);
-router.delete("/api/order-details/:id", authMiddleware, orderDetailsController.deleteOrderDetail);
+router.post("/api/order-detail", authMiddleware, orderDetailsController.createorder);
+router.get("/api/order-detail", authMiddleware, orderDetailsController.getAllOrderDetails);
+router.get("/api/order-detail/:id", authMiddleware, orderDetailsController.getOrderDetailById);
+router.put("/api/order-detail/:id", authMiddleware, orderDetailsController.updateOrderDetail);
+router.delete("/api/order-detail/:id", authMiddleware, orderDetailsController.deleteOrderDetail);
 
 export default router;

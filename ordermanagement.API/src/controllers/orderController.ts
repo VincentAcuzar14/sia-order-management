@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { OrderDetail } from "../models/orderDetail";
-import { IOrderDetail } from "../interfaces/orderDetailInterface";
+import { OrderDetail } from "../models/order";
+import { IOrderDetail } from "../interfaces/order";
 import mongoose from "mongoose";
-import { validateOrderDetail } from "../validations/orderDetailValidation";
+import { validateOrderDetail } from "../validations/order";
 
 export class OrderDetailController {
   // Create a new order detail
   // Handles POST requests to create a new order detail in the database
-  public async createOrderDetail(req: Request, res: Response): Promise<void> {
+  public async createorder(req: Request, res: Response): Promise<void> {
     try {
       // Validate incoming order detail data against schema rules
       const { error, value: payload } = validateOrderDetail(req.body);
